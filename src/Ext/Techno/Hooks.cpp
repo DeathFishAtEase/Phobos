@@ -24,11 +24,34 @@ DEFINE_HOOK(0x6F9E50, TechnoClass_AI, 0x5)
 }
 
 
-DEFINE_HOOK(0x6F42F7, TechnoClass_Init_SetLaserTrails, 0x2)
+DEFINE_HOOK(0x6F42F7, TechnoClass_Init, 0x2)
 {
 	GET(TechnoClass*, pThis, ESI);
+	auto const pTypeExt = TechnoTypeExt::ExtMap.Find(pThis->GetTechnoType());
 
 	TechnoExt::InitializeLaserTrails(pThis);
+
+	if (pTypeExt && pTypeExt->ChildTechno.isset())
+	{
+		auto pChildType = TechnoTypeClass::Array()->GetItem(pTypeExt->ChildTechno);
+		if (TechnoClass* pChild = static_cast<TechnoClass*>(pChildType->CreateObject(pThis->Owner)))
+		{
+			CoordStruct childCoord = TechnoExt::GetFLHAbsoluteCoords(
+				pThis, pTypeExt->ChildTechno_FLH, pTypeExt->ChildTechno_IsOnTurret);
+
+			Direction::Value childDir = pTypeExt->ChildTechno_IsOnTurret
+				? pThis->SecondaryFacing.current().value256() : pThis->PrimaryFacing.current().value256();
+
+			auto const pChildExt = TechnoExt::ExtMap.Find(pChild);
+			pChildExt->ParentTechno = pThis;
+			pChildExt->ParentFLH = pTypeExt->ChildTechno_FLH;
+			pChildExt->ParentIsOnTurret = pTypeExt->ChildTechno_IsOnTurret;
+
+			++Unsorted::IKnowWhatImDoing;
+			pChild->Unlimbo(childCoord, childDir);
+			--Unsorted::IKnowWhatImDoing;
+		}
+	}
 
 	return 0;
 }

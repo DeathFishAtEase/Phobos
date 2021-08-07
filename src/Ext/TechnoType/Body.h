@@ -55,8 +55,6 @@ public:
 		ValueableVector<int> OreGathering_Tiberiums;
 		ValueableVector<int> OreGathering_FramesPerDir;
 
-		Valueable<bool> DestroyAnim_Random;
-
 		struct LaserTrailDataEntry
 		{
 			ValueableIdx<LaserTrailTypeClass> idxType;
@@ -72,6 +70,12 @@ public:
 		};
 
 		ValueableVector<LaserTrailDataEntry> LaserTrailData;
+
+		Valueable<bool> DestroyAnim_Random;
+
+		NullableIdx<TechnoTypeClass> ChildTechno;
+		Valueable<CoordStruct> ChildTechno_FLH;
+		Valueable<bool> ChildTechno_IsOnTurret;
 
 		ExtData(TechnoTypeClass* OwnerObject) : Extension<TechnoTypeClass>(OwnerObject),
 			HealthBar_Hide(false),
@@ -107,8 +111,14 @@ public:
 			OreGathering_Anims(),
 			OreGathering_Tiberiums(),
 			OreGathering_FramesPerDir(),
-			LaserTrailData(),
-			DestroyAnim_Random(true)
+
+			DestroyAnim_Random(true),
+
+			ChildTechno(),
+			ChildTechno_FLH(),
+			ChildTechno_IsOnTurret(false),
+
+			LaserTrailData()
 		{ }
 
 		virtual ~ExtData() = default;

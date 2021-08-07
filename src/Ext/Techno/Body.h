@@ -24,12 +24,19 @@ public:
 		ValueableVector<std::unique_ptr<LaserTrailClass>> LaserTrails;
 		Valueable<bool> ReceiveDamage;
 
+		TechnoClass* ParentTechno;
+		CoordStruct ParentFLH;
+		bool ParentIsOnTurret;
+
 		ExtData(TechnoClass* OwnerObject) : Extension<TechnoClass>(OwnerObject),
 			InterceptedBullet(nullptr),
 			Shield(),
 			WasCloaked(false),
 			LaserTrails(),
-			ReceiveDamage(false)
+			ReceiveDamage(false),
+			ParentTechno(),
+			ParentFLH(),
+			ParentIsOnTurret(false)
 		{ }
 
 		virtual ~ExtData() = default;

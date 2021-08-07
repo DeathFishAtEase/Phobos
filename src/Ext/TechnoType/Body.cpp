@@ -115,6 +115,10 @@ void TechnoTypeExt::ExtData::LoadFromINIFile(CCINIClass* const pINI)
 
 	this->DestroyAnim_Random.Read(exINI, pSection, "DestroyAnim.Random");
 
+	this->ChildTechno.Read(exINI, pSection, "ChildTechno");
+	this->ChildTechno_FLH.Read(exINI, pSection, "ChildTechno.FLH");
+	this->ChildTechno_IsOnTurret.Read(exINI, pSection, "ChildTechno.IsOnTurret");
+
 	// Ares 0.A
 	this->GroupAs.Read(pINI, pSection, "GroupAs");
 
@@ -146,6 +150,8 @@ void TechnoTypeExt::ExtData::LoadFromINIFile(CCINIClass* const pINI)
 
 		this->LaserTrailData.push_back({ ValueableIdx<LaserTrailTypeClass>(trail), flh, isOnTurret });
 	}
+
+	
 }
 
 template <typename T>
