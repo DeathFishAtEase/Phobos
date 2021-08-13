@@ -1,10 +1,13 @@
 #include "Body.h"
 
+#include <BulletTypeClass.h>
+#include <BulletClass.h>
+
 template<> const DWORD Extension<WeaponTypeClass>::Canary = 0x22222222;
 WeaponTypeExt::ExtContainer WeaponTypeExt::ExtMap;
 
-void WeaponTypeExt::ExtData::Initialize() 
-{ 
+void WeaponTypeExt::ExtData::Initialize()
+{
 	this->RadType = RadTypeClass::FindOrAllocate("Radiation");
 }
 
@@ -83,6 +86,34 @@ bool WeaponTypeExt::SaveGlobals(PhobosStreamWriter& Stm)
 	return Stm
 		.Process(nOldCircumference)
 		.Success();
+}
+
+void WeaponTypeExt::DetonateAt(WeaponTypeClass* pThis, ObjectClass* pTarget, TechnoClass* pOwner)
+{
+	if (BulletClass* pBullet = pThis->Projectile->CreateBullet(pTarget, pOwner,
+		pThis->Damage, pThis->Warhead, 0, pThis->Bright))
+	{
+		const CoordStruct& coords = pTarget->GetCoords();
+
+		pBullet->SetWeaponType(pThis);
+		pBullet->SetLocation(coords);
+		pBullet->Limbo();
+		pBullet->Detonate(coords);
+		pBullet->UnInit();
+	}
+}
+
+void WeaponTypeExt::DetonateAt(WeaponTypeClass* pThis, const CoordStruct& coords, TechnoClass* pOwner)
+{
+	if (BulletClass* pBullet = pThis->Projectile->CreateBullet(nullptr, pOwner,
+		pThis->Damage, pThis->Warhead, 0, pThis->Bright))
+	{
+		pBullet->SetWeaponType(pThis);
+		pBullet->SetLocation(coords);
+		pBullet->Limbo();
+		pBullet->Detonate(coords);
+		pBullet->UnInit();
+	}
 }
 
 // =============================

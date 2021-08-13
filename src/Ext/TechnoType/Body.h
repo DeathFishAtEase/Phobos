@@ -7,6 +7,7 @@
 
 #include <New/Type/ShieldTypeClass.h>
 #include <New/Type/LaserTrailTypeClass.h>
+#include <New/Type/AttachmentTypeClass.h>
 
 class Matrix3D;
 
@@ -55,9 +56,28 @@ public:
 		ValueableVector<int> OreGathering_Tiberiums;
 		ValueableVector<int> OreGathering_FramesPerDir;
 
+		Valueable<bool> DestroyAnim_Random;
+
+		struct AttachmentDataEntry
+		{
+			ValueableIdx<AttachmentTypeClass> Type;
+			NullableIdx<TechnoTypeClass> TechnoType;
+			Valueable<CoordStruct> FLH;
+			Valueable<bool> IsOnTurret;
+
+			bool Load(PhobosStreamReader& stm, bool registerForChange);
+			bool Save(PhobosStreamWriter& stm) const;
+
+		private:
+			template <typename T>
+			bool Serialize(T& stm);
+		};
+
+		ValueableVector<AttachmentDataEntry> AttachmentData;
+
 		struct LaserTrailDataEntry
 		{
-			ValueableIdx<LaserTrailTypeClass> idxType;
+			ValueableIdx<LaserTrailTypeClass> Type;
 			Valueable<CoordStruct> FLH;
 			Valueable<bool> IsOnTurret;
 
@@ -70,12 +90,6 @@ public:
 		};
 
 		ValueableVector<LaserTrailDataEntry> LaserTrailData;
-
-		Valueable<bool> DestroyAnim_Random;
-
-		NullableIdx<TechnoTypeClass> ChildTechno;
-		Valueable<CoordStruct> ChildTechno_FLH;
-		Valueable<bool> ChildTechno_IsOnTurret;
 
 		ExtData(TechnoTypeClass* OwnerObject) : Extension<TechnoTypeClass>(OwnerObject),
 			HealthBar_Hide(false),
@@ -114,9 +128,7 @@ public:
 
 			DestroyAnim_Random(true),
 
-			ChildTechno(),
-			ChildTechno_FLH(),
-			ChildTechno_IsOnTurret(false),
+			AttachmentData(),
 
 			LaserTrailData()
 		{ }
