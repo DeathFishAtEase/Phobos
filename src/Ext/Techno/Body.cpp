@@ -277,9 +277,8 @@ void TechnoExt::InitializeAttachments(TechnoClass* pThis)
 
 	for (auto& entry : pTypeExt->AttachmentData)
 	{
-		auto const pAttachment = std::make_unique<AttachmentClass>(&entry, pThis, nullptr);
-		pAttachment->Initialize();
-		pExt->ChildAttachments.push_back(pAttachment);
+		pExt->ChildAttachments.push_back(std::make_unique<AttachmentClass>(&entry, pThis, nullptr));
+		pExt->ChildAttachments.back()->Initialize();
 	}
 }
 
