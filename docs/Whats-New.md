@@ -43,6 +43,7 @@ New:
 - Weapon targeting filter (by Uranusian)
 - Burst-specific FLH's for TechnoTypes (by Starkku)
 - Burst delays for weapons (by Starkku)
+- `DeployFireWeapon=-1` will allow the deployed infantry use both weapon as undeployed (by Uranusian)
 
 Vanilla fixes:
 - Fixed laser drawing code to allow for thicker lasers in house color draw mode (by Kerbiter, ChrisLv_CN)
