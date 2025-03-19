@@ -6,115 +6,135 @@
 [![EditorConfig](https://github.com/Phobos-developers/Phobos/workflows/EditorConfig/badge.svg)](https://github.com/Phobos-developers/Phobos/actions?query=workflow%3AEditorConfig)
 [![license](https://img.shields.io/github/license/Phobos-developers/Phobos.svg)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 
-> **Warning**
-> The project is currently not maintained actively enough and thus we are looking for active maintainers at the moment. Please message us [in Discord channel](https://discord.gg/sZeMzz6qVg) (or PM Kerbiter directly).
+项目目前的维护工作不够积极，因此我们正在寻找积极的维护者。
+
+请在 [Discord 频道](https://discord.gg/sZeMzz6qVg)留言给我们 （或直接私信 Kerbiter）。
 
 # Phobos
 
-...is a community engine extension project providing a set of new features and fixes for Yuri's Revenge based on [modified YRpp](https://github.com/Metadorius/YRpp) and [Syringe](https://github.com/Ares-Developers/Syringe) to allow injecting code. It's meant to accompany [Ares](https://github.com/Ares-Developers/Ares) rather than replace it, thus it won't introduce incompatibilities.
+...是一个社区引擎扩展项目，基于 [修改后的 YRpp](https://github.com/Metadorius/YRpp) 与 [Syringe](https://github.com/Ares-Developers/Syringe) 为《尤里的复仇》提供一系列新功能和 Bug 修复。它旨在与 [Ares](https://github.com/Ares-Developers/Ares) 引擎配套使用，而非取而代之，因此不会带来不兼容问题。
 
-While Phobos is independent of Ares and does NOT require Ares specifically to function, Phobos complements some of the features found in Ares and vice versa.
+虽然 Phobos 独立于 Ares 并且不需要 Ares 即可运行，但 Phobos 补充了 Ares 的一些功能，反之亦然。
 
-EA has not endorsed and does not support this product.
+此产品不受 EA 官方认可及支持。
 
-Community
+社区
 ---------
 
-As the project is international and English is currently studied the most commonly as a second language, it's the main project language. We do not limit the creation of language-specific community groups though, because we understand that many may not know English as well as their native language and/or may have trouble accessing Discord.
+由于该项目是国际性的，而英语是目前最常用的第二语言，因此英语是该项目的主要语言。 但我们并不限制创建特定语言的社区群组，因为我们知道很多人的英语可能不如母语好，而且／或者在访问 Discord 时可能会遇到困难。
 
-- **[🌐 International Discord channel on C&C Mod Haven](https://discord.gg/sZeMzz6qVg)**
-- [🇨🇳 Chinese QQ Phobos group](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=f_h7TZoVX_8--ZedVFBMmjRrLBIzjMKJ&authKey=QfNyW4DZUFqL3ZKzGL5PgLUWTnISj0myWn4WGtPPQmi3F%2FP3vfnuBd3YjLFk%2BU94&noverify=0&group_code=630590659)(630590659)
+- **[🌐C&C Mod Haven 的国际 Discord 频道](https://discord.gg/sZeMzz6qVg)**
+- [🇨🇳 Phobos 中文用户 QQ 群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=f_h7TZoVX_8--ZedVFBMmjRrLBIzjMKJ&authKey=QfNyW4DZUFqL3ZKzGL5PgLUWTnISj0myWn4WGtPPQmi3F%2FP3vfnuBd3YjLFk%2BU94&noverify=0&group_code=630590659)(630590659)
 
-Downloads
+下载
 ---------
 
-You can choose one of the following:
-- [Latest stable branch build](https://github.com/Phobos-developers/Phobos/releases/latest) (most bug-free release but very slow on new features)
-- [Latest development branch builds](https://github.com/Phobos-developers/Phobos/releases) (a bit less bug-free releases, devbuilds get new features when they are finished)
-- [Latest development branch nightly](https://nightly.link/Phobos-developers/Phobos/blob/develop/.github/workflows/nightly.yml) (added unreleased features that will be in next devbuild)
-- Individual new feature nightly builds for testing can be found in [pull requests](https://github.com/Phobos-developers/Phobos/pulls)
+你可以选择下列方式：
+- [最新的稳定发布版本](https://github.com/Phobos-developers/Phobos/releases/latest) （Bug 最少的版本，但功能更新上非常缓慢）
+- [最新的开发分支版本](https://github.com/Phobos-developers/Phobos/releases) （Bug 相对较少的版本，开发构建会在新功能**完成后**立即更新）
+- [最新的每夜构建版本](https://nightly.link/Phobos-developers/Phobos/blob/develop/.github/workflows/nightly.yml)（添加了尚未发布的功能，这些功能将在下一个开发分支版本中推出）
+- 用于测试单个新功能的每夜构建可在 [拉取请求](https://github.com/Phobos-developers/Phobos/pulls) 中找到
 
-### Note on nightly builds
+### 关于每夜构建版本的说明
 
-Last two listed versions are bleeding edge (don't redistribute them outside of testing!) and have build information (commit and branch/tag) in them which is displayed ingame and can't be turned off. You can get a build for development branch (link above) any up-to-date pull request via an automatic bot comment that would appear in it and would contain the most recent successfully compiled version of Phobos for that feature branch. Please note that the build is  produced *only if the PR has no merge conflicts*. Alternatively, you can get an artifact manually from GitHub Actions runs. You can get an artifact for a specific commit which is built automatically with a GitHub Actions workflow, just press on a green tick, open the workflow, find and download the build artifact. This is limited to authorized users only.
+后两个版本是前瞻版本（不要在测试之外重新分发它们！）
 
-Installation and Usage
+并且在游戏中显示了版本构建信息（提交和分支／标签），无法关闭。
+
+你可以通过自动机器人的评论获取任何最新拉取请求的开发分支版本（上面的链接），这些评论会出现在对应页面中，并包含该分支最新一次成功编译的 Phobos 版本。
+
+此外，你可以手动从 GitHub Actions 运行中获取工件。
+
+你可以获取一个通过 GitHub Actions 工作流自动构建的特定提交的工件，只需要点击绿色对钩，打开工作流，找到并下载工件。这仅限于注册用户。
+
+安装和使用
 ----------------------
 
-0. If you don't have Syringe installed into your mod already, you can download it together with the [latest Ares package](https://launchpad.net/ares/+download). To install simply drop `Syringe.exe` into your game folder (where your `gamemd.exe` is located). It's highly recommended to **install Ares** too to get full Phobos feature set, just drop all the files from the archive except documentation folder into your game folder.
-1. Obtain a Phobos "package" (official builds can be found on [releases page](https://github.com/Phobos-developers/Phobos/releases); read below to learn how to get nightly builds). You should end up with two files: `Phobos.dll` and `Phobos.pdb`.
-2. Place those files in the game folder (where your `gamemd.exe` is located).
-3. To launch the game with Phobos (and all other installed Syringe-compatible engine extensions including Ares) you need to execute `Syringe.exe "gamemd.exe" [command line arguments for gamemd.exe]` in command line (omit arguments if you don't need any). `RunAres.bat` from Ares package does the same so you may use that as well.
+0. 如果您的 mod 中还没有安装 Syringe，可以连同 [最新版 Ares 软件包](https://launchpad.net/ares/+download) 一同下载。安装时，只需将 `Syringe.exe` 拖入游戏根目录（即您的 `gamemd.exe` 所在的位置）。强烈建议同时**安装 Ares** 以获得完整的 Phobos 功能体验，只需将压缩包中除 `Documentation` 目录之外的所有文件放入游戏根目录即可。
+1. 获取 Phobos “软件包”（可在 [发布页面](https://github.com/Phobos-developers/Phobos/releases) 找到官方构建版；阅读下文了解如何获取每夜构建版本）。最终会生成两个文件：`Phobos.dll` 和 `Phobos.pdb`。
+2. 将这些文件放入游戏根目录（即您的 `gamemd.exe` 所在的位置）。
+3. 要使用 Phobos（以及所有其他已安装且兼容的 Syringe 拓展引擎，包括 Ares）启动游戏，你需要在命令行中执行 `Syringe.exe "gamemd.exe" [gamemd.exe 的命令行参数]`（如果不需要参数，请省略）。Ares 软件包中的 `RunAres.bat` 也有相同的功能，因此也可以使用。
 
-If you already use Ares in your mod, you just need to drop Phobos files mentioned above in your game folder, Syringe will load Phobos automatically. This also applies to mods using XNA client with Syringe; if your mod doesn't use Syringe and Ares (or you just haven't set up the client) yet we recommend to use [CnCNet client mod base by Starkku](https://github.com/Starkku/cncnet-client-mod-base) which is compatible with Ares and Phobos out of the box.
+如果您已经在 mod 中使用了 Ares，只需将上述 Phobos 文件放到游戏根目录中，Syringe 就会自动加载 Phobos。这也适用于使用 XNA 客户端和 Syringe 的 mod；如果您的 mod 尚未使用 Syringe 和 Ares（或者您尚未设置客户端），我们建议您使用 [Starkku 的 CnCNet 客户端 mod 基底](https://github.com/Starkku/cncnet-client-mod-base)，它与 Ares 和 Phobos 兼容并且开袋即食。
 
-Additional files and tools that you may need are located at [Phobos supplementaries repo](https://github.com/Phobos-developers/PhobosSupplementaries).
+您可能用到的其他文件与工具位于 [Phobos 补充资源库](https://github.com/Phobos-developers/PhobosSupplementaries)。
 
-By default Phobos doesn't do any very noticeable changes except a few bugfixes. To learn how to use Phobos features head over to official documentation.
+在默认情况下 Phobos 不会做任何非常明显的更改，除了一些错误修复。
 
-Documentation
+要了解如何使用 Phobos 功能，请参阅官方文档。
+
+文档
 -------------
 
-- [Official docs](https://phobos.readthedocs.io) (also available in [Chinese](https://phobos.readthedocs.io/zh_CN/latest))
-- [Community Chinese docs](https://docs.qq.com/doc/p/dc3da1ce39a6e787b6e133f7d33d6aebef581cb4)
-  - Because the Chinese translation of the official docs is currently underdeveloped, at the time it is recommended to use the community docs for Chinese users.
+- [官方文档](https://phobos.readthedocs.io) （也有 [英文](https://phobos.readthedocs.io/en/latest) 版本）
+- [社区中文文档](https://docs.qq.com/doc/p/dc3da1ce39a6e787b6e133f7d33d6aebef581cb4)
+  - 由于官方文档的中文翻译尚不完善，目前建议中国用户使用社区文档
 
-You can switch between versions (displays latest develop nightly version by default) in the bottom right corner, as well as download a PDF version.
+您可以在右下角切换版本（默认显示最新开发的每夜构建版本），也可以下载 PDF 版本
+（PDF 下载功能仅限英文文档）。
+文档分为几个大类，每类在侧边栏上都有一个页面。
+每个页面的内容又分为多个子类别，包括建筑、科技类型、步兵、超级武器或其他。
 
-The documentation is split by a few major categories, each represented with a page on the sidebar. Each page has its contents grouped into multiple subcategories, be it buildings, technotypes, infantries, superweapons or something else.
-
-### How to read code snippets
+### 如何阅读代码片段
 
 ```ini
-; which section the entries should be in
-; can be a freeform name - in this case the comment would explain what it is
-; if no comment to be found - then it's a precise name
-[SOMENAME]           ; BuildingType
-; KeyName=DefaultValue ; accepted type with optional explanation
-; if there's nothing to the right of equals sign - the default value is empty/absent
-; if these keys have had their value set, they can only be set to their default
-; unset state again by setting the value to <default>, <none> or none
-; for list of values only <default> clears the entire list
-; if the default value is not static - it's written and explained in a comment
-UIDescription=<none> ; CSF entry key
+; 一个条目应位于哪个小节
+; 可以是自由的命名形式 - 在这种情况下，注释将会解释它是什么
+; 如果找不到注释 - 那么这是一个固定且精确的名称
+[一个名称]            ; BuildingType
+; 标签名=默认值       ; 接受的类型与可选的解释
+; 如果等号右侧没有任何内容，则默认值为空/不存在
+; 如果这些键已经设置了它们的值，那么它们只能通过
+; 设置为 <default>, <none> 或 none 来重设为默认值
+; 对于值列表则仅有 <default> 可以清除整个列表
+; 如果默认值不是静态的，那么会在注释中写明并加以解释
+UIDescription=<none> ; CSF 条目
 ```
 
-Building manually
+手动生成
 -----------------
 
-0. Install **Visual Studio** (2022 is recommended, 2019 is minimum) with the dependencies listed in `.vsconfig` (it will prompt you to install missing dependences when you open the project, or you can run VS installer and import the config). If you prefer to use **Visual Studio Code** you may install **VS Build Tools** with the dependencies from `.vsconfig` instead. Not using a code editor or IDE and building via **command line scripts** included with the project is also an option.
-1. Clone this repo recursively via your favorite git client (that will also clone YRpp).
-2. To build the extension:
-   - in Visual Studio: open the solution file in VS and build it (`Debug` build config is recommended);
-   - in VSCode: open the project folder and hit `Run Build Task...` (`Ctrl + Shift + B`);
-   - barebones: run `scripts/build_debug.bat`.
-3. Upon build completion the resulting `Phobos.dll` and `Phobos.pdb` would be placed in the subfolder identical to the name of the buildconfig executed.
+0. 使用 `.vsconfig` 中列出的依赖项安装 **Visual Studio** （建议安装2022版，最低安装2019版）（打开项目时会提示安装缺失的依赖项，也可以运行 VS 安装程序并导入配置）。
+  2.如果您更喜欢使用 **Visual Studio Code**，也可以使用 `.vsconfig` 中的依赖项安装 **VS Build Tools**。
+  3.也可以不使用代码编辑器或集成开发环境而是通过项目中包含的 **命令行脚本** 进行构建。
+1. 通过您最喜欢的 git 客户端递归克隆该仓库（也会同时克隆 YRpp）。
+2. 对于构建扩展：
+   - 在 Visual Studio 中：在 VS 中打开解决方案文件并构建（建议使用 `Debug` 构建配置）；
+   - 在 VSCode 中：打开项目目录，点击`运行构建任务…`（`Ctrl+Shift+B`）；
+   - 其他：运行 `scripts/build_debug.bat`。
+3. 构建完成后，生成的 `Phobos.dll` 和 `Phobos.pdb` 将被放置在与执行的构建配置名称相同的子目录中。
 
-Credits
+鸣谢
 -------
 
-### Developers
-- **Belonit (Gluk-v48)** - project author
-- **Kerbiter (Metadorius)** - project co-author, BDFL, maintainer ([Patreon](https://www.patreon.com/kerbiter), PM me for PayPal to avoid fees)
-- **Starkku** - co-maintainer, developer ([Patreon](https://www.patreon.com/Starkku))
-- **Uranusian (Thrifinesma)** - developer, CN community ambassador
-- **secsome (SEC-SOME)** - developer
-- **Otamaa (Fahroni, BoredEXE)** - developer ([PayPal](https://paypal.me/GeneralOtama))
-- **FS-21** - developer
-- **Morton (MortonPL)** - co-maintainer, developer
-- **Trsdy (chaserli)** - co-maintainer, developer
+### 开发者
+- **Belonit (Gluk-v48)** - 项目作者
+- **Kerbiter (Metadorius)** - 项目共同作者，BDFL，维护者（[Patreon](https://www.patreon.com/kerbiter)，私信我获取 PayPal 以免额外费用）
+- **Starkku** - 共同维护者，开发者（[Patreon](https://www.patreon.com/Starkku)）
+- **Uranusian (Thrifinesma)** - 开发者，中国社区大使
+- **secsome (SEC-SOME)** - 开发者
+- **Otamaa (Fahroni, BoredEXE)** - 开发者（[PayPal](https://paypal.me/GeneralOtama)）
+- **FS-21** - 开发者
+- **Morton (MortonPL)** - 共同维护者，开发者
+- **Trsdy (chaserli)** - 共同维护者，开发者
 
-For all contributions see [full credits list](CREDITS.md).
+所有贡献者名单参见 [完整致谢列表](CREDITS.md)。
 
-Thanks to everyone who uses Phobos, tests changes and reports bugs! You can show your appreciation and help project by displaying the logo (monochrome version can be found [here](https://github.com/Phobos-developers/Phobos/blob/develop/logo-mono.png)) in your client/launcher (make it open Phobos GitHub page for extra fanciness), linking to Phobos repository, contributing or donating to us via the links above.
+感谢所有使用 Phobos、测试更改和报告 Bug 的人！
 
-Legal and License
+您可以在您的客户端／启动器中展示我们的 Logo（单色版本可在 [此处](https://github.com/Phobos-developers/Phobos/blob/develop/logo-mono.png) 获取）来表达您的感谢和为本项目提供助力（可以让它能够点击打开 Phobos GitHub 页面以显得更豪华），或者通过链接到 Phobos 的仓库、通过上方的链接向我们贡献代码或进行捐赠。
+
+法律与许可证
 -----
 
 [![LGPL v3](https://www.gnu.org/graphics/lgplv3-147x51.png)](https://opensource.org/licenses/LGPL-3.0)
 
-The Phobos project is an unofficial open-source community collaboration project to extend the Red Alert 2 Yuri's Revenge engine for modding and compatibility purposes.
+Phobos 项目是一个非官方的开源社区合作项目，旨在扩展《红色警戒2尤里的复仇》引擎以用于修改与兼容。
 
-As a modification, the project complies with [EA C&C modding guidelines](https://www.ea.com/games/command-and-conquer/command-and-conquer-remastered/modding-faq); should there be conflict between the project's license and modding guidelines - the rules imposed by guidelines shall take precedence (for example, the project should not be commercial or used to make money).
+作为修改，该项目符合 [EA C&C 修改指南](https://www.ea.com/games/command-and-conquer/command-and-conquer-remastered/modding-faq)；
 
-This project has no direct affiliation with Electronic Arts Inc. Command & Conquer, Command & Conquer Red Alert 2, Command & Conquer Yuri's Revenge are registered trademarks of Electronic Arts Inc. All Rights Reserved.
+如果项目许可与修改指南之间存在冲突，则以指南中的规则为准
+
+（例如，该项目不应用于商业用途或用于盈利）。
+
+本项目与艺电公司（Electronic Arts Inc.）没有任何直接关联。“Command & Conquer”、“Command & Conquer Red Alert 2” 和 “Command & Conquer Yuri's Revenge”均为艺电公司的注册商标。版权所有。
