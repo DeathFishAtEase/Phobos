@@ -12,7 +12,7 @@
 
 # Phobos
 
-...是一个社区引擎扩展项目，基于 [修改后的 YRpp](https://github.com/Metadorius/YRpp) 与 [Syringe](https://github.com/Ares-Developers/Syringe) 为《尤里的复仇》提供一系列新功能和 Bug 修复。它旨在与 [Ares](https://github.com/Ares-Developers/Ares) 引擎配套使用，而非取而代之，因此不会带来不兼容问题。
+...是一个社区引擎扩展项目，基于 [自定义 YRpp](https://github.com/Metadorius/YRpp) 与 [Syringe](https://github.com/Ares-Developers/Syringe) 为《尤里的复仇》提供一系列新功能和修复。它旨在与 [Ares](https://github.com/Ares-Developers/Ares) 引擎配套使用，而非取而代之，因此不会带来不兼容问题。
 
 虽然 Phobos 独立于 Ares 并且不需要 Ares 即可运行，但 Phobos 补充了 Ares 的一些功能，反之亦然。
 
@@ -21,10 +21,10 @@
 社区
 ---------
 
-由于该项目是国际性的，而英语是目前最常用的第二语言，因此英语是该项目的主要语言。 但我们并不限制创建特定语言的社区群组，因为我们知道很多人的英语可能不如母语好，而且／或者在访问 Discord 时可能会遇到困难。
+由于这是一个国际性的项目而英语是目前最常用的第二语言，因此英语是该项目的主要语言。 不过我们知道很多人的英语可能不如母语那样好，而且／或者在访问 Discord 时可能会遇到困难，所以我们并不限制创建特定语言的社区群组。
 
-- **[🌐C&C Mod Haven 的国际 Discord 频道](https://discord.gg/sZeMzz6qVg)**
-- [🇨🇳 Phobos 中文用户 QQ 群](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=f_h7TZoVX_8--ZedVFBMmjRrLBIzjMKJ&authKey=QfNyW4DZUFqL3ZKzGL5PgLUWTnISj0myWn4WGtPPQmi3F%2FP3vfnuBd3YjLFk%2BU94&noverify=0&group_code=630590659)(630590659)
+- **[🌐国际性的 Discord 频道：C&C Mod Haven](https://discord.gg/sZeMzz6qVg)**
+- [🇨🇳中文 QQ 群组 Phobos CN](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=f_h7TZoVX_8--ZedVFBMmjRrLBIzjMKJ&authKey=QfNyW4DZUFqL3ZKzGL5PgLUWTnISj0myWn4WGtPPQmi3F%2FP3vfnuBd3YjLFk%2BU94&noverify=0&group_code=630590659)(630590659)
 
 下载
 ---------
@@ -39,19 +39,23 @@
 
 后两个版本是前瞻版本（不要在测试之外重新分发它们！）
 
-并且在游戏中显示了版本构建信息（提交和分支／标签），无法关闭。
+并且它们会在游戏中显示无法关闭的版本构建信息（提交和分支／标签）。
 
-你可以通过自动机器人的评论获取任何最新拉取请求的开发分支版本（上面的链接），这些评论会出现在对应页面中，并包含该分支最新一次成功编译的 Phobos 版本。
+你可以通过开发分支（上方链接）获取一个构建版本以及在拉取请求中通过自动化机器人的评论获取其开发分支上任何最新成功编译的 Phobos 版本。
 
-此外，你可以手动从 GitHub Actions 运行中获取工件。
+注意**只有当拉取请求没有合并冲突**时才会生成。
 
-你可以获取一个通过 GitHub Actions 工作流自动构建的特定提交的工件，只需要点击绿色对钩，打开工作流，找到并下载工件。这仅限于注册用户。
+此外，你可以手动运行 GitHub Actions 来获取一个由工作流自动生成的工件。
+
+只需要点击绿色勾号，打开工作流页面，找到并下载对应的工件。
+
+这仅限于被授权的用户执行。
 
 安装和使用
 ----------------------
 
-0. 如果您的 mod 中还没有安装 Syringe，可以连同 [最新版 Ares 软件包](https://launchpad.net/ares/+download) 一同下载。安装时，只需将 `Syringe.exe` 拖入游戏根目录（即您的 `gamemd.exe` 所在的位置）。强烈建议同时**安装 Ares** 以获得完整的 Phobos 功能体验，只需将压缩包中除 `Documentation` 目录之外的所有文件放入游戏根目录即可。
-1. 获取 Phobos “软件包”（可在 [发布页面](https://github.com/Phobos-developers/Phobos/releases) 找到官方构建版；阅读下文了解如何获取每夜构建版本）。最终会生成两个文件：`Phobos.dll` 和 `Phobos.pdb`。
+0. 如果您的 mod 中还没有安装 Syringe，可以连同 [最新版 Ares 软件包](https://launchpad.net/ares/+download) 一同下载。安装时，只需将 `Syringe.exe` 拖入游戏根目录（即您的 `gamemd.exe` 所在的位置）。强烈建议同时**安装 Ares** 以获得完整的 Phobos 功能体验，只需将压缩包中除 Documentation 目录之外的所有文件放入游戏根目录即可。
+1. 获取 Phobos 「软件包」（可在 [发布页面](https://github.com/Phobos-developers/Phobos/releases) 找到官方构建版；阅读下文了解如何获取每夜构建版本）。最终会生成两个文件：`Phobos.dll` 和 `Phobos.pdb`。
 2. 将这些文件放入游戏根目录（即您的 `gamemd.exe` 所在的位置）。
 3. 要使用 Phobos（以及所有其他已安装且兼容的 Syringe 拓展引擎，包括 Ares）启动游戏，你需要在命令行中执行 `Syringe.exe "gamemd.exe" [gamemd.exe 的命令行参数]`（如果不需要参数，请省略）。Ares 软件包中的 `RunAres.bat` 也有相同的功能，因此也可以使用。
 
@@ -122,19 +126,19 @@ UIDescription=<none> ; CSF 条目
 
 感谢所有使用 Phobos、测试更改和报告 Bug 的人！
 
-您可以在您的客户端／启动器中展示我们的 Logo（单色版本可在 [此处](https://github.com/Phobos-developers/Phobos/blob/develop/logo-mono.png) 获取）来表达您的感谢和为本项目提供助力（可以让它能够点击打开 Phobos GitHub 页面以显得更豪华），或者通过链接到 Phobos 的仓库、通过上方的链接向我们贡献代码或进行捐赠。
+感谢所有使用 Phobos、测试更改和报告 Bug 的人！ 你可以将我们的 Logo（单色版本可在 [此处](https://github.com/Phobos-developers/Phobos/blob/develop/logo-mono.png) 获取）在你的客户端／启动器中展示（使其能够打开 Phobos 项目的 GitHub 主页以显得更加豪华）、将其链接到 Phobos 仓库、通过上方链接想我没贡献代码或进行捐助等方式来表达你的感谢并为本项目提供助力。
 
 法律与许可证
 -----
 
-[![LGPL v3](https://www.gnu.org/graphics/lgplv3-147x51.png)](https://opensource.org/licenses/LGPL-3.0)
+[![GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://opensource.org/license/GPL-3.0)
 
-Phobos 项目是一个非官方的开源社区合作项目，旨在扩展《红色警戒2尤里的复仇》引擎以用于修改与兼容。
+Phobos 是一个非官方的开源社区合作项目，旨在扩展《红色警戒2尤里的复仇》引擎以用于 Mod 制作与兼容性目的。
 
-作为修改，该项目符合 [EA C&C 修改指南](https://www.ea.com/games/command-and-conquer/command-and-conquer-remastered/modding-faq)；
+作为一项修改，该项目符合 [EA C&C 修改指南](https://www.ea.com/games/command-and-conquer/command-and-conquer-remastered/modding-faq)；
 
 如果项目许可与修改指南之间存在冲突，则以指南中的规则为准
 
 （例如，该项目不应用于商业用途或用于盈利）。
 
-本项目与艺电公司（Electronic Arts Inc.）没有任何直接关联。“Command & Conquer”、“Command & Conquer Red Alert 2” 和 “Command & Conquer Yuri's Revenge”均为艺电公司的注册商标。版权所有。
+本项目与艺电公司（Electronic Arts Inc.）没有任何直接关联。「Command & Conquer」、「Command & Conquer Red Alert 2」 和 「Command & Conquer Yuri's Revenge」均为艺电公司的注册商标。版权所有。
