@@ -329,6 +329,31 @@ It was originally planned to list global features that are exclusively related t
 
 -->
 
+### Allow deploy controlled MCV
+
+In vanilla, you cannot deploy a controlled vehicle to `ConstructionYard=true` building. Now you can customize it.
+
+In `rulesmd.ini`:
+```ini
+[General]
+AllowDeployControlledMCV=false   ; boolean
+```
+
+### Chrono sparkle animation customization & improvements
+
+- It is now possible to customize the frame delay between instances of `[General] -> ChronoSparkle1` animations created on objects being warped by setting `[General] -> ChronoSparkleDisplayDelay`.
+- By default on buildings with `MaxNumberOccupants` higher than 0, chrono sparkle animation would be shown at each of the `MuzzleFlashX` coordinates. This behaviour is now customizable, and supports `MuzzleFlashX` indices higher than 10.
+  - `[General] -> ChronoSparkleBuildingDisplayPositions` can be set to show the sparkle animation on the building (`building`), muzzle flash coordinates of current occupants (`occupants`), muzzle flash coordinates of all occupant slots (`occupantslots`) or any combination of these.
+    - If `occupants` or `occupantslots` is listed without `building`, a single chrono sparkle animation is still displayed on building if it doesn't have any occupants or it has `MaxNumberOccupants` value less than 1, respectively.
+- The chrono sparkle animation that is displayed on building itself is also now displayed at the center of it rather than at center of its topmost cell.
+
+In `rulesmd.ini`:
+```ini
+[General]
+ChronoSparkleDisplayDelay=24                         ; integer, game frames
+ChronoSparkleBuildingDisplayPositions=occupantslots  ; List of chrono sparkle position enum (building | occupants | occupantslots | all)
+```
+
 ### Crate improvements
 
 There are some improvements on goodie crate logic:
@@ -388,6 +413,17 @@ In `rulesmd.ini`:
 Storage.TiberiumIndex=-1  ; integer, [Tiberiums] list index
 ```
 
+### Customize the chained damage of the wall
+
+- In vanilla, when the wall is damaged, it will deal 200 damage to the walls in the 4 nearby cells. This makes connected walls more vulnerable to damage compared to single walls.
+- Now you can customize that damage by using the following flag.
+
+In `rulesmd.ini`:
+```ini
+[CombatDamage]
+AdjacentWallDamage=200  ; integer
+```
+
 ### Customizing effect of level lighting on air units
 
 - It is now possible to customize how air units are affected by level lighting, separately for AircraftTypes and infantry/vehicles with Jumpjet `Locomotor`.
@@ -419,6 +455,19 @@ In `rulesmd.ini`:
 [AudioVisual]
 IronCurtain.ExtraTintIntensity=0.0  ; floating point value
 ForceShield.ExtraTintIntensity=0.0  ; floating point value
+```
+
+### Jumpjet climbing logic enhancement
+
+- You can now let the jumpjets increase their height earlier by set `JumpjetClimbPredictHeight` to true. The jumpjet will raise its height 5 cells in advance, instead of only raising its height when encountering cliffs or buildings in front of it.
+- You can also let them simply skip the stop check by set `JumpjetClimbWithoutCutOut` to true. The jumpjet will not stop moving horizontally when encountering cliffs or buildings in front of it, but will continue to move forward while raising its altitude.
+  - When `JumpjetClimbPredictHeight` is enabled, if the height raised five grids in advance is still not enough to cross cliffs or buildings, it will stop and move horizontally as before, unless `JumpjetClimbWithoutCutOut` is also enabled.
+
+In `rulesmd.ini`:
+```ini
+[General]
+JumpjetClimbPredictHeight=false  ; boolean
+JumpjetClimbWithoutCutOut=false  ; boolean
 ```
 
 ### Move IvanBomb Position
@@ -595,6 +644,16 @@ VoxelLightSource=            ; X,Y,Z - position of the light in the world relati
 In order to easily preview the light source settings use the [VXL Viewer and VPL Generator tool by thomassneddon](https://github.com/ThomasSneddon/vxl-renderer/releases). To use the tool unpack it somewhere, then drag the main VXL file of a voxel that you will use to preview onto it (auxilliary VXL and HVA files must be in the same folder).
 
 Keep in mind that the tool doesn't account for `UseFixedVoxelLighting=true` as of yet, so the values shown in tool need to be offset when putting in the game with with fixed voxel lighting.
+```
+
+### Waypoints for buildings
+
+- In vanilla, buildings are forbidden to use waypoints. Now you can allow that using the following flag.
+
+In `rulesmd.ini`:
+```ini
+[General]
+BuildingWaypoints=false  ; boolean
 ```
 
 ## Aircraft
@@ -1031,16 +1090,6 @@ Units.RepairPercent=  ; floating point value, percents or absolute, default to [
 Units.UseRepairCost=  ; boolean
 ```
 
-### Waypoints for buildings
-
-- In vanilla, buildings are forbidden to use waypoints. Now you can allow that using the following flag.
-
-In `rulesmd.ini`:
-```ini
-[General]
-BuildingWaypoints=false  ; boolean
-```
-
 ### Customize if cloning need power
 
 - In vanilla, cloning vats can work fine even low power. Starting from Ares 2.0, they need power to work. Now you can specific it.
@@ -1081,17 +1130,6 @@ ProneSpeed=                   ; floating point value, multiplier, by default, us
 ```
 
 ## Overlays
-
-### Customize the chained damage of the wall
-
-- In vanilla, when the wall is damaged, it will deal 200 damage to the walls in the 4 nearby cells. This makes connected walls more vulnerable to damage compared to single walls.
-- Now you can customize that damage by using the following flag.
-
-In `rulesmd.ini`:
-```ini
-[CombatDamage]
-AdjacentWallDamage=200  ; integer
-```
 
 ## Particle systems
 
@@ -1300,21 +1338,6 @@ Pips.SelfHeal.Buildings.Offset=15,10    ; X,Y, pixels relative to default
 
 [SOMETECHNO]                            ; TechnoType
 SelfHealGainType=                       ; Self-Heal Gain Type Enumeration (noheal|infantry|units)
-```
-
-### Chrono sparkle animation customization & improvements
-
-- It is now possible to customize the frame delay between instances of `[General] -> ChronoSparkle1` animations created on objects being warped by setting `[General] -> ChronoSparkleDisplayDelay`.
-- By default on buildings with `MaxNumberOccupants` higher than 0, chrono sparkle animation would be shown at each of the `MuzzleFlashX` coordinates. This behaviour is now customizable, and supports `MuzzleFlashX` indices higher than 10.
-  - `[General] -> ChronoSparkleBuildingDisplayPositions` can be set to show the sparkle animation on the building (`building`), muzzle flash coordinates of current occupants (`occupants`), muzzle flash coordinates of all occupant slots (`occupantslots`) or any combination of these.
-    - If `occupants` or `occupantslots` is listed without `building`, a single chrono sparkle animation is still displayed on building if it doesn't have any occupants or it has `MaxNumberOccupants` value less than 1, respectively.
-- The chrono sparkle animation that is displayed on building itself is also now displayed at the center of it rather than at center of its topmost cell.
-
-In `rulesmd.ini`:
-```ini
-[General]
-ChronoSparkleDisplayDelay=24                         ; integer, game frames
-ChronoSparkleBuildingDisplayPositions=occupantslots  ; List of chrono sparkle position enum (building | occupants | occupantslots | all)
 ```
 
 ### Customizable ChronoSphere teleport delays for units
@@ -1622,19 +1645,6 @@ IronCurtain.Effect=                ; IronCurtain effect Enumeration (kill | invu
 IronCurtain.KillWarhead=           ; WarheadType, default to [CombatDamage] -> IronCurtain.KillOrganicsWarhead
 ForceShield.Effect=                ; IronCurtain effect Enumeration (kill | invulnerable | ignore)
 ForceShield.KillWarhead=           ; WarheadType, default to [CombatDamage] -> ForceShield.KillOrganicsWarhead
-```
-
-### Jumpjet climbing logic enhancement
-
-- You can now let the jumpjets increase their height earlier by set `JumpjetClimbPredictHeight` to true. The jumpjet will raise its height 5 cells in advance, instead of only raising its height when encountering cliffs or buildings in front of it.
-- You can also let them simply skip the stop check by set `JumpjetClimbWithoutCutOut` to true. The jumpjet will not stop moving horizontally when encountering cliffs or buildings in front of it, but will continue to move forward while raising its altitude.
-  - When `JumpjetClimbPredictHeight` is enabled, if the height raised five grids in advance is still not enough to cross cliffs or buildings, it will stop and move horizontally as before, unless `JumpjetClimbWithoutCutOut` is also enabled.
-
-In `rulesmd.ini`:
-```ini
-[General]
-JumpjetClimbPredictHeight=false  ; boolean
-JumpjetClimbWithoutCutOut=false  ; boolean
 ```
 
 ### Jumpjet rotating on crashing toggle
@@ -2494,31 +2504,4 @@ In `rulesmd.ini`:
 ```ini
 [SOMEWEAPON]         ; WeaponType
 IsSingleColor=false  ; boolean
-```
-
-## Allow deploy controlled MCV
-
-In vanilla, you cannot deploy a controlled vehicle to `ConstructionYard=true` building. Now you can customize it.
-
-In `rulesmd.ini`:
-```ini
-[General]
-AllowDeployControlledMCV=false   ; boolean
-```
-
-## Customize type selection for IFV
-
-In vanilla game, when using type selection command on IFVs, all of them will be selected regardless of their current modes, which is allowed to customize now.
-- `WeaponGroupAsN` determines which group the IFV is in when enabling `WeaponN`, where N stands for 1-based weapon mode index. IFVs in the same group will be selected together during type a selection, while not included those in different groups.
-- `TypeSelectUseIFVMode` determines whether all IFV modes will be considered as its own group by default during a type selection.
-  - If it's set to true, `WeaponGroupAsN` will be default to N for each `WeaponN`, which makes each of them become a standalone type during a type selection.
-  - If it's set to false, `WeaponGroupAsN` will be default to 0 for all weapons, which makes type selection on IFVs work the same as before.
-
-In `rulesmd.ini`:
-```ini
-[General]
-TypeSelectUseIFVMode=false   ; boolean
-
-[SOMEVEHICLE]                ; VehicleType
-WeaponGroupAsN=              ; string, default to N if [General] -> TypeSelectUseIFVMode=true, and 0 if false
 ```
