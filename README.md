@@ -24,7 +24,7 @@
 由于这是一个国际性的项目而英语是目前最常用的第二语言，因此英语是该项目的主要语言。 不过我们知道很多人的英语可能不如母语那样好，而且／或者在访问 Discord 时可能会遇到困难，所以我们并不限制创建特定语言的社区群组。
 
 - **[🌐国际性的 Discord 频道：C&C Mod Haven](https://discord.gg/sZeMzz6qVg)**
-- [🇨🇳中文 QQ 群组 Phobos CN](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=f_h7TZoVX_8--ZedVFBMmjRrLBIzjMKJ&authKey=QfNyW4DZUFqL3ZKzGL5PgLUWTnISj0myWn4WGtPPQmi3F%2FP3vfnuBd3YjLFk%2BU94&noverify=0&group_code=630590659)(630590659)
+- **[🇨🇳 中文社区公共交流论坛：Phobos CN](https://phoboscn.top)**
 
 下载
 ---------
