@@ -1207,6 +1207,7 @@ EMPulse.SuspendOthers=false  ; boolean
   - `LimboKill.Counts` sets how many buildings of each type will be removed. Value from position matching the position from `LimboKill.IDs` is used if found, or no limitation if not found. If list is empty, there's no limitation for all types.
 
 - Delivery can be made random with these optional tags. The game will randomly choose only a single building from the list for each roll chance provided.
+  - `LimboDelivery.DeliverChances` can be used to customize the chance of each building delivery occuring. Value from position matching the position from `LimboDelivery.Types` is used if found, or last listed value if not found. If list is empty, every building delivery is guaranteed to occur.
   - `LimboDelivery.RollChances` lists chances of each "dice roll" happening. Valid values range from 0% (never happens) to 100% (always happens). Defaults to a single sure roll.
   - `LimboDelivery.RandomWeightsN` lists the weights for each "dice roll" that increase the probability of picking a specific building. Valid values are 0 (don't pick) and above (the higher value, the bigger the likelyhood). `RandomWeights` are a valid alias for `RandomWeights0`. If a roll attempt doesn't have weights specified, the last weights will be used.
 
@@ -1227,6 +1228,7 @@ In `rulesmd.ini`:
 [SOMESW]                        ; SuperWeaponType
 LimboDelivery.Types=            ; List of BuildingTypes
 LimboDelivery.IDs=              ; List of numeric IDs, -1 cannot be used
+LimboDelivery.DeliverChances=   ; List of floating-point values (percentage or absolute)
 LimboDelivery.RollChances=      ; List of percentages
 LimboDelivery.RandomWeightsN=   ; List of integers
 LimboKill.AffectsHouse=self     ; Affected House Enumeration (none|owner/self|allies/ally|team|enemies/enemy|all)
@@ -1251,6 +1253,7 @@ Remember that Limbo Delivered buildings don't exist physically! This means they 
 - `Message.LinkedSWAcquired` will be displayed to the firer when at least 1 linked superweapon is acquired or has timer set.
 - `EVA.LinkedSWAcquired` will be played to the firer when at least 1 linked superweapon is acquired or has timer set.
 - These superweapons can be made random with these optional tags. The game will randomly choose only a single superweapon from the list for each roll chance provided.
+  - `SW.Link.LinkedChances` can be used to customize the chance of each linked superweapon activation occuring. Value from position matching the position from `SW.Link` is used if found, or last listed value if not found. If list is empty, every linked superweapon activation is guaranteed to occur.
   - `SW.Link.RollChances` lists chances of each "dice roll" happening. Valid values range from 0% (never happens) to 100% (always happens). Defaults to a single sure roll.
   - `SW.Link.RandomWeightsN` lists the weights for each "dice roll" that increase the probability of picking a specific superweapon. Valid values are 0 (don't pick) and above (the higher value, the bigger the likelyhood). `RandomWeights` are a valid alias for `RandomWeights0`. If a roll attempt doesn't have weights specified, the last weights will be used.
 
@@ -1261,6 +1264,7 @@ SW.Link=                     ; List of SuperWeaponTypes
 SW.Link.Grant=false          ; boolean
 SW.Link.Ready=               ; boolean, default to SW.InitialReady for granted superweapons, false otherwise
 SW.Link.Reset=false          ; boolean
+SW.Link.LinkedChances=       ; List of floating-point values (percentage or absolute)
 SW.Link.RollChances=         ; List of percentages.
 SW.Link.RandomWeightsN=      ; List of integers.
 Message.LinkedSWAcquired=    ; CSF entry key
@@ -1277,6 +1281,7 @@ EVA.LinkedSWAcquired=        ; EVA entry
   - `SW.Next.IgnoreInhibitors` ignores `SW.Inhibitors`/`SW.AnyInhibitor` of each superweapon, otherwise only non-inhibited superweapons are launched.
   - `SW.Next.IgnoreDesignators` ignores `SW.Designators` / `SW.AnyDesignator` respectively.
 - These superweapons can be made random with these optional tags. The game will randomly choose only a single superweapon from the list for each roll chance provided.
+  - `SW.Next.LaunchChances` can be used to customize the chance of each next superweapon launch occuring. Value from position matching the position from `SW.Next` is used if found, or last listed value if not found. If list is empty, every next superweapon launch is guaranteed to occur.
   - `SW.Next.RollChances` lists chances of each "dice roll" happening. Valid values range from 0% (never happens) to 100% (always happens). Defaults to a single sure roll.
   - `SW.Next.RandomWeightsN` lists the weights for each "dice roll" that increase the probability of picking a specific superweapon. Valid values are 0 (don't pick) and above (the higher value, the bigger the likelyhood). `RandomWeights` are a valid alias for `RandomWeights0`. If a roll attempt doesn't have weights specified, the last weights will be used.
 
@@ -1287,6 +1292,7 @@ SW.Next=                        ; List of SuperWeaponTypes
 SW.Next.RealLaunch=true         ; boolean
 SW.Next.IgnoreInhibitors=false  ; boolean
 SW.Next.IgnoreDesignators=true  ; boolean
+SW.Next.LaunchChances=          ; List of floating-point values (percentage or absolute)
 SW.Next.RollChances=            ; List of percentages.
 SW.Next.RandomWeightsN=         ; List of integers.
 ```

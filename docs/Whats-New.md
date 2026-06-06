@@ -583,6 +583,7 @@ HideShakeEffects=false           ; boolean
 - Allow `RemoveMindControl` warhead to mute `MindClearedSound` (by Noble_Fish)
 - Introduce weight selection rules for ExtraWarheads (by Noble_Fish)
 - [Allow infantry to perform type conversion when deploying and undeploying](New-or-Enhanced-Logics.md#allow-infantry-to-perform-type-conversion-when-deploying-and-undeploying) (by Noble_Fish)
+- Added probabilities for determining whether each type takes effect after the weight-based selection ends for LimboDelivery, SW.Next, SW.Link (by Noble_Fish)
 
 #### Vanilla fixes:
 - Fixed sidebar not updating queued unit numbers when adding or removing units when the production is on hold (by CrimRecya)

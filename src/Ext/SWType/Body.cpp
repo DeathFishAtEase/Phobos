@@ -56,6 +56,7 @@ void SWTypeExt::ExtData::Serialize(T& Stm)
 		.Process(this->CameoPriority)
 		.Process(this->LimboDelivery_Types)
 		.Process(this->LimboDelivery_IDs)
+		.Process(this->LimboDelivery_DeliverChances)
 		.Process(this->LimboDelivery_RandomWeightsData)
 		.Process(this->LimboDelivery_RollChances)
 		.Process(this->LimboKill_AffectsHouse)
@@ -71,6 +72,7 @@ void SWTypeExt::ExtData::Serialize(T& Stm)
 		.Process(this->SW_Next_RealLaunch)
 		.Process(this->SW_Next_IgnoreInhibitors)
 		.Process(this->SW_Next_IgnoreDesignators)
+		.Process(this->SW_Next_LaunchChances)
 		.Process(this->SW_Next_RandomWeightsData)
 		.Process(this->SW_Next_RollChances)
 		.Process(this->ShowTimer_Priority)
@@ -96,6 +98,7 @@ void SWTypeExt::ExtData::Serialize(T& Stm)
 		.Process(this->SW_Link_Grant)
 		.Process(this->SW_Link_Ready)
 		.Process(this->SW_Link_Reset)
+		.Process(this->SW_Link_LinkedChances)
 		.Process(this->SW_Link_RandomWeightsData)
 		.Process(this->SW_Link_RollChances)
 		.Process(this->Message_LinkedSWAcquired)
@@ -152,6 +155,7 @@ void SWTypeExt::ExtData::LoadFromINIFile(CCINIClass* const pINI)
 	this->CameoPriority.Read(exINI, pSection, "CameoPriority");
 	this->LimboDelivery_Types.Read(exINI, pSection, "LimboDelivery.Types");
 	this->LimboDelivery_IDs.Read(exINI, pSection, "LimboDelivery.IDs");
+	this->LimboDelivery_DeliverChances.Read(exINI, pSection, "LimboDelivery.DeliverChances");
 	this->LimboDelivery_RollChances.Read(exINI, pSection, "LimboDelivery.RollChances");
 	if (exINI.ReadString(pSection, "LimboKill.Affected") > 0)
 	{
@@ -165,6 +169,7 @@ void SWTypeExt::ExtData::LoadFromINIFile(CCINIClass* const pINI)
 	this->SW_Next_RealLaunch.Read(exINI, pSection, "SW.Next.RealLaunch");
 	this->SW_Next_IgnoreInhibitors.Read(exINI, pSection, "SW.Next.IgnoreInhibitors");
 	this->SW_Next_IgnoreDesignators.Read(exINI, pSection, "SW.Next.IgnoreDesignators");
+	this->SW_Next_LaunchChances.Read(exINI, pSection, "SW.Next.LaunchChances");
 	this->SW_Next_RollChances.Read(exINI, pSection, "SW.Next.RollChances");
 
 	this->ShowTimer_Priority.Read(exINI, pSection, "ShowTimer.Priority");
@@ -234,6 +239,7 @@ void SWTypeExt::ExtData::LoadFromINIFile(CCINIClass* const pINI)
 	this->SW_Link_Reset.Read(exINI, pSection, "SW.Link.Reset");
 	this->Message_LinkedSWAcquired.Read(exINI, pSection, "Message.LinkedSWAcquired");
 	this->EVA_LinkedSWAcquired.Read(exINI, pSection, "EVA.LinkedSWAcquired");
+	this->SW_Link_LinkedChances.Read(exINI, pSection, "SW.Link.LinkedChances");
 	this->SW_Link_RollChances.Read(exINI, pSection, "SW.Link.RollChances");
 
 	// SW.Link.RandomWeights

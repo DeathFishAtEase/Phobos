@@ -58,6 +58,7 @@ public:
 		Valueable<int> CameoPriority;
 		ValueableVector<BuildingTypeClass*> LimboDelivery_Types;
 		ValueableVector<int> LimboDelivery_IDs;
+		ValueableVector<double> LimboDelivery_DeliverChances;
 		ValueableVector<float> LimboDelivery_RollChances;
 		Valueable<AffectedHouse> LimboKill_AffectsHouse;
 		ValueableVector<int> LimboKill_IDs;
@@ -67,6 +68,7 @@ public:
 		Valueable<bool> SW_Next_RealLaunch;
 		Valueable<bool> SW_Next_IgnoreInhibitors;
 		Valueable<bool> SW_Next_IgnoreDesignators;
+		ValueableVector<double> SW_Next_LaunchChances;
 		ValueableVector<float> SW_Next_RollChances;
 
 		Valueable<int> ShowTimer_Priority;
@@ -109,6 +111,7 @@ public:
 		Valueable<bool> SW_Link_Grant;
 		Valueable<bool> SW_Link_Ready;
 		Valueable<bool> SW_Link_Reset;
+		ValueableVector<double> SW_Link_LinkedChances;
 		ValueableVector<float> SW_Link_RollChances;
 		Valueable<CSFText> Message_LinkedSWAcquired;
 		NullableIdx<VoxClass> EVA_LinkedSWAcquired;
@@ -151,6 +154,7 @@ public:
 			, CameoPriority { 0 }
 			, LimboDelivery_Types {}
 			, LimboDelivery_IDs {}
+			, LimboDelivery_DeliverChances {}
 			, LimboDelivery_RollChances {}
 			, LimboDelivery_RandomWeightsData {}
 			, LimboKill_AffectsHouse { AffectedHouse::Owner }
@@ -166,6 +170,7 @@ public:
 			, SW_Next_RealLaunch { true }
 			, SW_Next_IgnoreInhibitors { false }
 			, SW_Next_IgnoreDesignators { true }
+			, SW_Next_LaunchChances {}
 			, SW_Next_RollChances {}
 			, SW_Next_RandomWeightsData {}
 			, ShowTimer_Priority { 0 }
@@ -191,6 +196,7 @@ public:
 			, SW_Link_Grant { false }
 			, SW_Link_Ready { false }
 			, SW_Link_Reset { false }
+			, SW_Link_LinkedChances {}
 			, SW_Link_RollChances {}
 			, SW_Link_RandomWeightsData {}
 			, Message_LinkedSWAcquired {}

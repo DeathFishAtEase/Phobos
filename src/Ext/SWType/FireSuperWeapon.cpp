@@ -168,6 +168,19 @@ static inline void LimboCreate(BuildingTypeClass* pType, HouseClass* pOwner, int
 
 void SWTypeExt::ExtData::ApplyLimboDelivery(HouseClass* pHouse)
 {
+	auto const& chances = this->LimboDelivery_DeliverChances;
+	auto& random = ScenarioClass::Instance->Random;
+
+	auto shouldDeliver = [&](size_t index) -> bool
+	{
+		if (chances.size() == 0)
+			return true;
+		double prob = (index < chances.size())
+			? chances[index]
+			: chances[chances.size() - 1];
+		return random.RandomDouble() <= prob;
+	};
+
 	// random mode
 	if (this->LimboDelivery_RandomWeightsData.size())
 	{
@@ -179,7 +192,8 @@ void SWTypeExt::ExtData::ApplyLimboDelivery(HouseClass* pHouse)
 			if (result < idsSize)
 				id = this->LimboDelivery_IDs[result];
 
-			LimboCreate(this->LimboDelivery_Types[result], pHouse, id);
+			if (shouldDeliver(result))
+				LimboCreate(this->LimboDelivery_Types[result], pHouse, id);
 		}
 	}
 	// no randomness mode
@@ -193,7 +207,8 @@ void SWTypeExt::ExtData::ApplyLimboDelivery(HouseClass* pHouse)
 			if (i < idsSize)
 				id = this->LimboDelivery_IDs[i];
 
-			LimboCreate(this->LimboDelivery_Types[i], pHouse, id);
+			if (shouldDeliver(i))
+				LimboCreate(this->LimboDelivery_Types[i], pHouse, id);
 		}
 	}
 }
@@ -300,6 +315,19 @@ void SWTypeExt::ExtData::ApplyDetonation(HouseClass* pHouse, const CellStruct& c
 
 void SWTypeExt::ExtData::ApplySWNext(SuperClass* pSW, const CellStruct& cell)
 {
+	auto const& chances = this->SW_Next_LaunchChances;
+	auto& random = ScenarioClass::Instance->Random;
+
+	auto shouldLaunch = [&](size_t index) -> bool
+	{
+		if (chances.size() == 0)
+			return true;
+		double prob = (index < chances.size())
+			? chances[index]
+			: chances[chances.size() - 1];
+		return random.RandomDouble() <= prob;
+	};
+
 	// SW.Next proper launching mechanic
 	auto LaunchTheSW = [=](const int swIdxToLaunch)
 		{
@@ -333,13 +361,19 @@ void SWTypeExt::ExtData::ApplySWNext(SuperClass* pSW, const CellStruct& cell)
 	{
 		const auto results = this->WeightedRollsHandler(&this->SW_Next_RollChances, &this->SW_Next_RandomWeightsData, this->SW_Next.size());
 		for (const int result : results)
-			LaunchTheSW(this->SW_Next[result]);
+		{
+			if (shouldLaunch(static_cast<size_t>(result)))
+				LaunchTheSW(this->SW_Next[result]);
+		}
 	}
 	// no randomness mode
 	else
 	{
-		for (const auto swType : this->SW_Next)
-			LaunchTheSW(swType);
+		for (size_t i = 0; i < this->SW_Next.size(); i++)
+		{
+			if (shouldLaunch(i))
+				LaunchTheSW(this->SW_Next[i]);
+		}
 	}
 }
 
@@ -451,6 +485,19 @@ void SWTypeExt::ExtData::ApplyLinkedSW(SuperClass* pSW)
 		return false;
 	};
 
+	auto const& chances = this->SW_Link_LinkedChances;
+	auto& random = ScenarioClass::Instance->Random;
+
+	auto shouldLink = [&](size_t index) -> bool
+	{
+		if (chances.size() == 0)
+			return true;
+		double prob = (index < chances.size())
+			? chances[index]
+			: chances[chances.size() - 1];
+		return random.RandomDouble() <= prob;
+	};
+
 	bool isActive = false;
 
 	// random mode
@@ -460,18 +507,24 @@ void SWTypeExt::ExtData::ApplyLinkedSW(SuperClass* pSW)
 
 		for (const int result : results)
 		{
-			if (linkedSW(this->SW_Link[result]))
-				isActive = true;
+			if (shouldLink(static_cast<size_t>(result)))
+			{
+				if (linkedSW(this->SW_Link[result]))
+					isActive = true;
+			}
 		}
 	}
 
 	// no randomness mode
 	else
 	{
-		for (const auto swType : this->SW_Link)
+		for (size_t i = 0; i < this->SW_Link.size(); i++)
 		{
-			if (linkedSW(swType))
-				isActive = true;
+			if (shouldLink(i))
+			{
+				if (linkedSW(this->SW_Link[i]))
+					isActive = true;
+			}
 		}
 	}
 
