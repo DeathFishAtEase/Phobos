@@ -40,6 +40,8 @@ public:
 	bool ShouldBeDiscardedNow();
 	bool IsFromSource(TechnoClass* pInvoker, AbstractClass* pSource) const { return pInvoker == this->Invoker && pSource == this->Source; }
 	TechnoClass* GetInvoker() const { return this->Invoker; }
+	HouseClass* GetInvokerHouse() const { return this->InvokerHouse; }
+	AbstractClass* GetSource() const { return this->Source; }
 	bool IsActive() const { return this->IsOnline && this->IsActiveIgnorePowered(); }
 
 	bool IsActiveIgnorePowered() const

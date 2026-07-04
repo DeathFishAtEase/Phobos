@@ -179,6 +179,8 @@ void AttachEffectTypeClass::LoadFromINI(CCINIClass* pINI)
 	this->Unkillable.Read(exINI, pSection, "Unkillable");
 	this->LaserTrail_Type.Read(exINI, pSection, "LaserTrail.Type");
 
+	this->Next.Read(exINI, pSection, "Next");
+
 	// Groups
 	exINI.ParseStringList(this->Groups, pSection, "Groups");
 	AddToGroupsMap();
@@ -261,6 +263,7 @@ void AttachEffectTypeClass::Serialize(T& Stm)
 		.Process(this->DisableWeapons)
 		.Process(this->Unkillable)
 		.Process(this->LaserTrail_Type)
+		.Process(this->Next)
 		.Process(this->Groups)
 		.Process(this->NeedCalculate)
 		;

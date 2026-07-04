@@ -102,6 +102,8 @@ public:
 	Valueable<bool> Unkillable;
 	ValueableIdx<LaserTrailTypeClass> LaserTrail_Type;
 
+	ValueableVector<AttachEffectTypeClass*> Next;
+
 	std::vector<std::string> Groups;
 	bool NeedCalculate;
 
@@ -166,6 +168,7 @@ public:
 		, DisableWeapons { false }
 		, Unkillable { false }
 		, LaserTrail_Type { -1 }
+		, Next {}
 		, Groups {}
 		, NeedCalculate { false }
 	{};

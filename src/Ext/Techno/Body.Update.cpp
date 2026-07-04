@@ -1882,6 +1882,7 @@ void TechnoExt::ExtData::UpdateAttachEffects()
 	bool altered = false;
 	std::vector<std::unique_ptr<AttachEffectClass>>::iterator it;
 	std::vector<std::pair<WeaponTypeClass*, TechnoClass*>> expireWeapons;
+	std::vector<std::tuple<TechnoClass*, HouseClass*, TechnoClass*, AbstractClass*, std::vector<AttachEffectTypeClass*>>> nextQueue;
 
 	for (it = this->AttachedEffects.begin(); it != this->AttachedEffects.end(); )
 	{
@@ -1932,6 +1933,17 @@ void TechnoExt::ExtData::UpdateAttachEffects()
 				}
 			}
 
+			if (hasExpired && pType->Next.size() > 0)
+			{
+				nextQueue.emplace_back(
+					pThis,
+					attachEffect->GetInvokerHouse(),
+					attachEffect->GetInvoker(),
+					attachEffect->GetSource(),
+					pType->Next
+				);
+			}
+
 			if (shouldDiscard && attachEffect->ResetIfRecreatable())
 			{
 				++it;
@@ -1961,6 +1973,13 @@ void TechnoExt::ExtData::UpdateAttachEffects()
 	{
 		auto const pInvoker = pair.second;
 		WeaponTypeExt::DetonateAt(pair.first, coords, pInvoker, pInvoker->Owner, pThis);
+	}
+
+	for (auto const& [pTarget, pHouse, pInvoker, pSource, nextTypes] : nextQueue)
+	{
+		AEAttachInfoTypeClass info;
+		info.AttachTypes.assign(nextTypes.begin(), nextTypes.end());
+		AttachEffectClass::Attach(pTarget, pHouse, pInvoker, pSource, info);
 	}
 }
 
