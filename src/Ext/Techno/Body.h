@@ -145,6 +145,12 @@ public:
 	{ }
 
 	void OnEarlyUpdate();
+	void UpdateBarrelFacing();
+
+	static DirStruct GetDefaultBarrelFacing(const TechnoTypeClass* pType)
+	{
+		return DirStruct(0x4000 - (pType->FireAngle << 8));
+	}
 
 	// the extension state that goes with TechnoClass::Init
 	void InitializeState(TechnoTypeClass* pType = nullptr);

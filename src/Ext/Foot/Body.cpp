@@ -805,7 +805,7 @@ void FootExt::UpdateTypeData(TechnoTypeClass* pCurrentType)
 			}
 
 			// FireAngle
-			pThis->BarrelFacing.SetCurrent(DirStruct(0x4000 - (pCurrentType->FireAngle << 8)));
+			pThis->BarrelFacing.SetCurrent(TechnoExt::GetDefaultBarrelFacing(pCurrentType));
 
 			// Reset recoil data
 			static_cast<UnitExt*>(this)->InitializeRecoilData();

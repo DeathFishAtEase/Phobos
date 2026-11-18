@@ -525,6 +525,8 @@ public:
 
 	Nullable<bool> Parasite_AllowWaterExit;
 
+	Nullable<bool> BarrelTilt;
+
 	// Ares 0.2
 	Valueable<int> RadarJamRadius;
 	ValueableIdx<VocClass> VoiceIFVRepair;
@@ -962,6 +964,8 @@ public:
 
 		, Parasite_AllowWaterExit {}
 
+		, BarrelTilt { }
+
 		// Ares 0.2
 		, RadarJamRadius { 0 }
 		, VoiceIFVRepair { -1 }
@@ -997,6 +1001,7 @@ public:
 	virtual void LoadFromStream(PhobosStreamReader& Stm) override;
 	virtual void SaveToStream(PhobosStreamWriter& Stm) override;
 
+	bool IsBarrelTiltEnabled() const;
 	void ApplyTurretOffset(Matrix3D* mtx, double factor = 1.0);
 	void CalculateSpawnerRange();
 	bool IsSecondary(int nWeaponIndex) const;

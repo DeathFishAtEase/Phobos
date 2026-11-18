@@ -62,6 +62,30 @@ static double GetPrimaryRadian(UnitClass* pThis)
 	return pThis->PrimaryFacing.Current().GetRadian<32>();
 }
 
+static bool HasNonDefaultBarrelPitch(const TechnoClass* pThis, const TechnoTypeClass* pType)
+{
+	return pThis->BarrelFacing.Current().GetFacing<32>() != TechnoExt::GetDefaultBarrelFacing(pType).GetFacing<32>();
+}
+
+// Covers the native voxel-barrel draw paths, including buildings.
+DEFINE_HOOK(0x706647, TechnoClass_DrawVoxel_DynamicBarrelPitch, 0x6)
+{
+	GET(TechnoClass*, pThis, ECX);
+	GET_STACK(const VoxelStruct*, pVoxel, 0x54);
+	REF_STACK(int, cacheKey, 0x5C);
+
+	if (cacheKey != -1)
+	{
+		const auto pType = pThis->GetTechnoType();
+
+		if (pVoxel == &pType->BarrelVoxel && HasNonDefaultBarrelPitch(pThis, pType)
+			&& TechnoTypeExt::Fetch(pType)->IsBarrelTiltEnabled())
+			cacheKey = -1;
+	}
+
+	return 0;
+}
+
 DEFINE_HOOK(0x73BA12, UnitClass_DrawAsVXL_RewriteTurretDrawing, 0x6)
 {
 	enum { SkipGameCode = 0x73BEA4 };
@@ -117,6 +141,9 @@ DEFINE_HOOK(0x73BA12, UnitClass_DrawAsVXL_RewriteTurretDrawing, 0x6)
 	constexpr BlitterFlags blit = BlitterFlags::Alpha | BlitterFlags::Flat;
 	// When in recoiling or have no cache, need to recalculate drawing matrix
 	const bool shouldRedraw = !haveTurretCache || haveBar && !haveBarrelCache;
+	// The shared barrel cache does not include pitch in its key.
+	const bool dynamicBarrelPitch = haveBar && HasNonDefaultBarrelPitch(pThis, pDrawType)
+		&& TechnoTypeExt::Fetch(pThis->Type)->IsBarrelTiltEnabled();
 
 	// The orientation of the turret can affect the layer order of the barrel and turret
 	const auto turretDir = pThis->SecondaryFacing.Current().GetFacing<4>();
@@ -137,7 +164,7 @@ DEFINE_HOOK(0x73BA12, UnitClass_DrawAsVXL_RewriteTurretDrawing, 0x6)
 					if (!haveBar)
 						return false;
 
-					if (pThis->BarrelRecoil.State != RecoilData::RecoilState::Inactive)
+					if (dynamicBarrelPitch || pThis->BarrelRecoil.State != RecoilData::RecoilState::Inactive)
 						return true;
 
 					return pDrawTypeExt->ExtraBarrelCount.Get() > 0;
@@ -162,7 +189,7 @@ DEFINE_HOOK(0x73BA12, UnitClass_DrawAsVXL_RewriteTurretDrawing, 0x6)
 					const bool barrelInRecoil = pBrlData && pBrlData->State != RecoilData::RecoilState::Inactive;
 
 					// When in recoiling or is not main barrel, need to bypass cache and draw without saving
-					const bool brlShouldRedraw = turretInRecoil || barrelInRecoil || idx >= 0;
+					const bool brlShouldRedraw = dynamicBarrelPitch || turretInRecoil || barrelInRecoil || idx >= 0;
 					const auto brlKey = brlShouldRedraw ? -1 : flags;
 					const auto brlCache = brlShouldRedraw ? nullptr : &pDrawType->VoxelTurretBarrelCache;
 

@@ -27,6 +27,42 @@ void TechnoExt::OnEarlyUpdate()
 		return;
 
 	this->ApplyInterceptor();
+	this->UpdateBarrelFacing();
+}
+
+void TechnoExt::UpdateBarrelFacing()
+{
+	const auto pTypeExt = this->TypeExtData;
+
+	if (!pTypeExt->IsBarrelTiltEnabled())
+		return;
+
+	const auto pThis = this->OwnerObject();
+	const auto pType = pTypeExt->OwnerObject();
+
+	const bool hasBarrel = pType->BarrelVoxel.VXL && pType->BarrelVoxel.HVA;
+	const bool hasChargerBarrels = pType->Voxel && pType->TurretCount > 0 && !pType->IsGattling;
+
+	if (!hasBarrel && !hasChargerBarrels)
+		return;
+
+	auto facing = GetDefaultBarrelFacing(pType);
+	const auto pTarget = abstract_cast<TechnoClass*>(pThis->Target);
+
+	if (pTarget && pTarget->IsAlive && !pTarget->InLimbo && pTarget->IsInAir())
+	{
+		const auto pivot = GetFLHAbsoluteCoords(pThis, CoordStruct::Empty, true);
+		const auto delta = pTarget->GetCenterCoords() - pivot;
+		const double dx = delta.X;
+		const double dy = delta.Y;
+		const double horizontalDistance = Math::sqrt(dx * dx + dy * dy);
+
+		if (horizontalDistance > 0.0 || delta.Z != 0)
+			facing.SetRadian<65536>(Math::atan2(delta.Z, horizontalDistance));
+	}
+
+	if (pThis->BarrelFacing.Current() != facing)
+		pThis->BarrelFacing.SetCurrent(facing);
 }
 
 void TechnoExt::ApplyInterceptor()

@@ -52,6 +52,19 @@ namespace
 
 bool TechnoTypeExt::SelectWeaponMutex = false;
 
+bool TechnoTypeExt::IsBarrelTiltEnabled() const
+{
+	if (!this->BarrelTilt.Get(RulesExt::Global()->BarrelTilt))
+		return false;
+
+	const auto pType = this->OwnerObject();
+
+	if (const auto pBuildingType = abstract_cast<BuildingTypeClass*, true>(pType))
+		return !pBuildingType->EMPulseCannon;
+
+	return pType->WhatAmI() == AbstractType::UnitType;
+}
+
 void TechnoTypeExt::ApplyTurretOffset(Matrix3D* mtx, double factor)
 {
 	// Does not verify if the offset actually has all values parsed as it makes no difference, it will be 0 for the unparsed ones either way.
@@ -1430,6 +1443,8 @@ void TechnoTypeExt::LoadFromINIFile(CCINIClass* const pINI)
 
 	this->ParseVoiceWeaponAttacks(exINI, pSection, this->VoiceWeaponAttacks, this->VoiceEliteWeaponAttacks);
 
+	this->BarrelTilt.Read(exINI, pSection, "BarrelTilt");
+
 	// Ares 0.2
 	this->RadarJamRadius.Read(exINI, pSection, "RadarJamRadius");
 	this->VoiceIFVRepair.Read(exINI, pSection, "VoiceIFVRepair");
@@ -1868,6 +1883,8 @@ void TechnoTypeExt::Serialize(T& Stm)
 		.Process(this->AI_Power)
 		.Process(this->AI_Power_AffectedByEnhancers)
 		.Process(this->Parasite_AllowWaterExit)
+
+		.Process(this->BarrelTilt)
 
 		// Ares 0.2
 		.Process(this->RadarJamRadius)
