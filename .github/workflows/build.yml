@@ -1,0 +1,53 @@
+name: Build
+
+# One build per push. Produces a downloadable zip with the compiled DLL and PDB.
+#
+# Branches that are skipped:
+# - `展示`   : the showcase (default) branch, documentation only, there is no source to build
+# - `dev-docs`: the documentation branch, built by the docs pipeline instead
+# - any branch whose name contains a `/` (feature/project/lab branches), which is why the
+#   include pattern is `*` and not `**` - `*` never matches the `/` character. Negated
+#   patterns are applied in order, after the positive one.
+on:
+  push:
+    branches:
+    - '*'
+    - '!展示'
+    - '!dev-docs'
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .
+
+  # Configuration type to build.
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        submodules: recursive
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '[16.0, )'
+
+    - uses: ammaraskar/msvc-problem-matcher@master
+
+    # Same build the upstream nightly produced (BuildType=NIGHTLY defines the preprocessor
+    # macro of the same name), minus the SyringeEx launcher and the exception database.
+    - name: Build Phobos
+      run: msbuild /m /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:BuildType=NIGHTLY ${{ env.SOLUTION_FILE_PATH }}
+      shell: cmd
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-dll-${{ github.sha }}
+        path: |
+          ${{ env.SOLUTION_FILE_PATH }}/${{ env.BUILD_CONFIGURATION }}/Phobos.dll
+          ${{ env.SOLUTION_FILE_PATH }}/${{ env.BUILD_CONFIGURATION }}/Phobos.pdb
